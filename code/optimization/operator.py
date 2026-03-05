@@ -26,7 +26,6 @@ def insert_move(order):
     order = list(order)
     elem = order.pop(i)
     order.insert(j, elem)
-
     return tuple(order)
 
 def neighbor(order):
