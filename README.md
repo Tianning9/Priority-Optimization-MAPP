@@ -8,10 +8,11 @@ This repository contains both the thesis document and the implementation code.
 repository/
 │
 ├── thesis/
-│   Contains the MSc thesis document describing the research background, methodology, and experimental results.
+│   └── thesis.pdf
 │
 ├── code/
-│   Contains the Python implementation used for the simulations and optimization experiments.
+│   ├── main.py
+│   └── other implementation files
 │
 └── README.md
 
