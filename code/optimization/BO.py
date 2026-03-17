@@ -1,3 +1,4 @@
+import time
 import torch
 import gpytorch
 import numpy as np
@@ -5,7 +6,7 @@ from gpytorch.models import ExactGP
 from botorch.fit import fit_gpytorch_mll
 from gpytorch.mlls import ExactMarginalLogLikelihood
 
-from operator import neighbor
+from optimization.Localoperator import neighbor
 from planner import simulate_order_once
 
 
@@ -64,6 +65,9 @@ class PermutationGP(ExactGP):
         super().__init__(X, y, likelihood)
         self.mean_module = gpytorch.means.ConstantMean()
         self.covar_module = KendallKernel(lam=0.1)
+    def transform_inputs(self, X):
+        # required by BoTorch but not used for permutations
+        return X
     def forward(self, x):
         mean_x = self.mean_module(x)
         cov_x = self.covar_module(x)
@@ -71,7 +75,6 @@ class PermutationGP(ExactGP):
  
 def BO_permutation_optimize(players, goals, power, env, eval_budget=80):
 
-    import time
     t_start = time.time()
 
     N = len(players)
